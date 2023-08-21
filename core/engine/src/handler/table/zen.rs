@@ -89,7 +89,6 @@ impl<'a> DecisionTableHandler<'a> {
         })
     }
 
-    // Core logic
     fn evaluate_row(&self, content: &'a DecisionTableContent, index: usize) -> Option<RowResult> {
         let rule = content.rules.get(index)?;
         for input in &content.inputs {
