@@ -124,7 +124,6 @@ impl<'a> Isolate<'a> {
 
         (*var).try_into().ok()
     }
-
     pub fn run_standard(&self, source: &'a str) -> Result<Value, IsolateError> {
         self.clear();
 
