@@ -42,21 +42,23 @@ pub enum DecisionNodeKind {
     FunctionNode { content: String },
     DecisionNode { content: DecisionNodeContent },
     DecisionTableNode { content: DecisionTableContent },
-    SwitchNode { content: SwitchContent },
+    DecisionTreeNode { content: SwitchContent },
     ExpressionNode { content: ExpressionNodeContent },
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
 #[cfg_attr(feature = "bincode", derive(Encode, Decode))]
-#[serde(rename_all = "camelCase")]
-
+#[serde(untagged, rename_all = "camelCase")]
 pub enum RuleValue {
     Model(String),
-    Nested(HashMap<String, RuleValue>),
+    Nested(Rules),
 }
 
-type Rules = HashMap<String, RuleValue>;
+pub type Rules = HashMap<String, RuleValue>;
+
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "bincode", derive(Encode, Decode))]
+#[serde(rename_all = "camelCase")]
 pub struct SwitchContent {
     pub rules: Rules,
     pub inputs: Vec<SwitchInputField>,

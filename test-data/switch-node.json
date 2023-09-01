@@ -11,7 +11,7 @@
     },
     {
       "id": "0624d5fd-1944-4781-92bb-e32873ce91e2",
-      "type": "switchNode",
+      "type": "decisionTreeNode",
       "position": {
         "x": 410,
         "y": 210
@@ -36,20 +36,20 @@
           }
         ],
         "rules": {
-          "group = 1": {
+          "group == 1": {
             "number <= 10": "model1",
             "number > 10": "model2",
             "else": "model3"
           },
-          "group = 2": {
+          "group == 2": {
             "number <= 10": {
-              "letter == A": "model1",
-              "else": "model2"
+              "letter == 'A'": "model1",
+              "else": "model2-from-inner-else"
             },
-            "number > 10": "model2",
-            "else": "model3"
+            "number > 15": "model2",
+            "else": "model3-else"
           },
-          "group = 3": "model4"
+          "group == 3": "model4"
         }
       }
     },
